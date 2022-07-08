@@ -21,7 +21,6 @@
 """
 
 # Require Python 3.6 or later
-from cProfile import run
 from concurrent.futures import process
 from datetime import datetime
 import sys
@@ -33,7 +32,6 @@ if not (sys.version_info.major >= 3 and sys.version_info.minor >= 6):
 
 import concurrent.futures
 import logging
-import os
 import threading
 import time
 
