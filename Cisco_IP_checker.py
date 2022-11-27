@@ -57,11 +57,14 @@ def ssh_connection(device, commands):
                                         zip(ip_numbers["ipaddr"], ip_numbers["mask"])
                                     )
                                     # Fetching the first and primary IP + Submask on the interface
+                                    # main IP is returned first in the dict
                                     print_output.append(
                                         f"{list(ip_to_dict.items())[0][0]}/{list(ip_to_dict.items())[0][1]}"
                                     )
-                                    # Check if the interface have multiple IP's and log them as secondary
+                                    # Check if the interface have multiple IP's
+                                    # if list have more than one entry log them as secondary IP's
                                     if len(list(ip_to_dict.items())) > 1:
+                                        # skip first entry since we have already fetched that as primary IP
                                         for key, value in list(ip_to_dict.items())[1:]:
                                             print_output.append(
                                                 f"{key}/{value} secondary"
@@ -102,6 +105,7 @@ def main():
     devices = [
         {
             "device_type": "cisco_ios",
+            # "device_type": "hp_procurve",
             "host": ip,
             "username": ssh_username,
             "password": password,
